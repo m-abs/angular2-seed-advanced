@@ -1,5 +1,7 @@
 // angular
+import {OnInit, OnDestroy} from '@angular/core';
 import {ChangeDetectionStrategy} from '@angular/core';
+let instance = 0;
 
 // app
 import {NameListService} from '../../frameworks/app/index';
@@ -17,8 +19,17 @@ import {ToolbarComponent} from './toolbar.component';
   directives: [LangSwitcherComponent, NavbarComponent, ToolbarComponent, PlatformDirective],
   changeDetection: ChangeDetectionStrategy.Default // Everything else uses OnPush
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  private instanceNo = ++instance;
   constructor(public analytics: AnalyticsService) {
 
+  }
+
+  ngOnInit() {
+    console.log(`AppComponent<${this.instanceNo}>.ngOnInit()`);
+  }
+
+  ngOnDestroy() {
+    console.log(`AppComponent<${this.instanceNo}>.ngOnDestroy()`);
   }
 }
