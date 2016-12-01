@@ -1,6 +1,12 @@
 // libs
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs';
+
+export interface ListViewItem {
+  title: string;
+  currentSegment?: boolean;
+}
 
 // app
 import { BaseComponent, RouterExtensions } from '../../frameworks/core/index';
@@ -14,11 +20,34 @@ import * as nameList from '../../frameworks/sample/index';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent {
-  public names$: Observable<Array<string>>;
+  public navitems = new BehaviorSubject<ListViewItem[]>(null);
+  public names$: Observable<any>;
   public newName: string = '';
 
   constructor(private store: Store<IAppState>, public routerext: RouterExtensions) {
     this.names$ = store.let(<any>getNames);
+
+    const items: ListViewItem[] = [
+      {
+        'title': 'Bunker 137',
+      }, {
+        'title': 'Gangsta rap',
+      }, {
+        'title': 'Se',
+        'currentSegment': true,
+      }, {
+        'title': 'Grantræet',
+      }, {
+        'title': 'Nørkel Nissegård Emmanuel Tilfreds',
+      }, {
+        'title': 'Gravrøverne',
+      }, {
+        'title': 'Drømmerens datter',
+      }, {
+        'title': 'Skyggeforbandelsen',
+      }];
+
+    this.navitems.next(items);
   }
 
   /*
