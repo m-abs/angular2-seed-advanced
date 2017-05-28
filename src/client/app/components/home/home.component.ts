@@ -12,7 +12,7 @@ import { NameList } from '../../modules/sample/index';
   moduleId: module.id,
   selector: 'sd-home',
   templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css']
+  styleUrls: ['home.component.scss']
 })
 export class HomeComponent implements OnInit {
   public names$: Observable<any>;

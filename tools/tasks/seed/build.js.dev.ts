@@ -30,7 +30,8 @@ export =
         '!' + join(Config.APP_SRC, `**/${Config.NG_FACTORY_FILE}.ts`)
       ];
 
-      let projectFiles = gulp.src(src);
+      let projectFiles = gulp.src(src)
+        .pipe(plugins.replace(/\.scss/, '.css'));
       let result: any;
       let isFullCompile = true;
 
